@@ -47,7 +47,7 @@ class TranslateToBar extends StatefulWidget {
 }
 
 class _TranslateToBarState extends State<TranslateToBar> {
-  var _languages = ["English", "Hindi", "Chinese"];
+  var _languages = ["English", "Hindi", "Chinese", "German"];
   var _currentItem = "English";
   @override
   Widget build(BuildContext context) {
