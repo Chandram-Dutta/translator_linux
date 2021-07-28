@@ -7,25 +7,32 @@ class TranslateInOutArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-            child: Container(
-          child: (TextField(
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+              child: (TextField(
             decoration: InputDecoration(
-                border: OutlineInputBorder(), hintText: 'Enter a search term'),
-            maxLines: 20,
-          )),
-        )),
-        Expanded(
-            child: Container(
-          color: Colors.red,
-          child: FittedBox(
-            child: Text("Hi"),
-          ),
-        ))
-      ],
+              border: OutlineInputBorder(),
+              hintText: 'Enter to translate',
+            ),
+          ))),
+          Expanded(
+              child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(
+                  color: Colors.deepOrange,
+                  width: 2,
+                )),
+            child: FittedBox(
+              child: Text("Hi"),
+            ),
+          ))
+        ],
+      ),
     );
   }
 }

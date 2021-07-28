@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
         title: Text("Translator"),
         actions: [
           IconButton(
+            tooltip: "More",
             onPressed: () {},
             icon: Icon(YaruIcons.view_more),
           )
@@ -38,6 +39,12 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        tooltip: "Translate",
+        onPressed: () {},
+        child: Icon(YaruIcons.go_next),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
