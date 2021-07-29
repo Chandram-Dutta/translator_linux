@@ -1,36 +1,57 @@
 import 'package:flutter/material.dart';
 
-class TranslateInOutArea extends StatelessWidget {
+class TranslateInOutArea extends StatefulWidget {
   const TranslateInOutArea({
     Key? key,
   }) : super(key: key);
 
   @override
+  _TranslateInOutAreaState createState() => _TranslateInOutAreaState();
+}
+
+class _TranslateInOutAreaState extends State<TranslateInOutArea> {
+  String translated = "";
+  @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-              child: (TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter to translate',
-            ),
-          ))),
-          Expanded(
+              child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2),
               child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(
-                  color: Colors.deepOrange,
-                  width: 2,
+                height: MediaQuery.of(context).size.height - 90,
+                child: (TextField(
+                  maxLines: 200,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter to translate',
+                  ),
                 )),
-            child: FittedBox(
-              child: Text("Hi"),
+              ),
             ),
-          ))
+          )),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 2),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(
+                      color: Colors.deepOrange,
+                      width: 2,
+                    )),
+                child: SingleChildScrollView(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height - 92,
+                    child: Text(translated),
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
