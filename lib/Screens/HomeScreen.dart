@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:translator_linux/Widgets/MenuItem.dart';
 import 'package:translator_linux/Widgets/TranslateInOutArea.dart';
+import 'package:translator_linux/constants.dart';
+import 'package:translator_linux/model/MenuItem.dart';
+import 'package:translator_linux/services/SendMail.dart';
+import 'package:translator_linux/services/UrlLauncher.dart';
 import 'package:yaru_icons/widgets/yaru_icons.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -13,11 +18,12 @@ class HomeScreen extends StatelessWidget {
         actions: [
           TranslateToBar(),
           SizedBox(width: 15),
-          IconButton(
-            tooltip: "More",
-            onPressed: () {},
-            icon: Icon(YaruIcons.view_more),
-          )
+          PopupMenuButton<MenuItem>(
+              icon: Icon(YaruIcons.view_more),
+              onSelected: (item) => onSelected(context, item),
+              itemBuilder: (context) => [
+                    ...MenuItems.items.map(buildItem).toList(),
+                  ]),
         ],
       ),
       body: SingleChildScrollView(
@@ -42,6 +48,54 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+  }
+
+  PopupMenuItem<MenuItem> buildItem(MenuItem item) => PopupMenuItem<MenuItem>(
+        value: item,
+        child: Row(
+          children: [
+            Icon((item.icon)),
+            SizedBox(width: 2),
+            Text(item.text),
+          ],
+        ),
+      );
+
+  onSelected(BuildContext context, MenuItem item) {
+    switch (item) {
+      case MenuItems.info:
+        showAboutDialog(
+          context: context,
+          applicationIcon: Image.asset(
+            "assets/icons/Translate64Logo.png",
+            fit: BoxFit.fill,
+          ),
+          applicationName: "Translator",
+          applicationVersion: "0.1(Dev)",
+          applicationLegalese: mitLicense,
+          children: [
+            TextButton(
+              onPressed: () {
+                launchUrl("https://github.com/Chandram-Dutta/translator_linux");
+              },
+              child: Text("Source Code @ GitHub"),
+            ),
+            TextButton(
+                onPressed: () {
+                  sendMail();
+                },
+                child: Text("Report Bug Or Request Feature")),
+            TextButton(
+              onPressed: () {
+                launchUrl("https://linux-translator.web.app/");
+              },
+              child: Text("Run On Web"),
+            )
+          ],
+        );
+
+        break;
+    }
   }
 }
 
