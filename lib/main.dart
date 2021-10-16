@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:translator_linux/languagesList.dart';
+import 'package:translator_linux/screens/home_screen.dart';
 import 'package:yaru/yaru.dart' as yaru;
-import 'package:translator_linux/Screens/HomeScreen.dart';
 
 void main() {
   runApp(MyApp());
