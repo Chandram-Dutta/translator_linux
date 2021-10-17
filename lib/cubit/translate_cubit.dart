@@ -6,17 +6,19 @@ import 'package:translator_linux/screens/home_screen.dart';
 part 'translate_state.dart';
 
 HomeScreen toTranslateText = HomeScreen();
-String text = toTranslateText.translateController.text;
+var text = toTranslateText.translateController.text;
+String translatedText = "";
 
 class TranslateCubit extends Cubit<TranslateState> {
   TranslateCubit() : super(TranslateState(translateText: text));
 
-  void translate() async {
+  void translate() {
     final translator = GoogleTranslator();
-    var translation =
-        await translator.translate(state.translateText.toString(), to: 'en');
+    var translation = translator
+        .translate(state.translateText, to: 'en')
+        .then((value) => translatedText = value.toString());
     print(translation);
-    emit(TranslateState(translateText: translation.toString()));
+    emit(TranslateState(translateText: translatedText));
     // emit(TranslateState(translateText: "sda"));
   }
 }
